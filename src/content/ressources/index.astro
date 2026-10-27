@@ -1,0 +1,29 @@
+---
+import { getCollection } from "astro:content";
+import BaseHead from "../../components/BaseHead.astro";
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header.astro";
+
+const ressources = await getCollection("ressources");
+---
+
+<html lang="fr">
+  <head>
+    <BaseHead title="Ressources" description="Ma veille" />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <h1>Ressources</h1>
+      <ul>
+        {ressources.map((ressource) => (
+          <li>
+            <a href={`/ressources/${ressource.id}/`}>{ressource.data.title}</a>
+            ({ressource.data.category})
+          </li>
+        ))}
+      </ul>
+    </main>
+    <Footer />
+  </body>
+</html>
